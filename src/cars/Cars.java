@@ -1,13 +1,18 @@
 package cars;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Cars {
-    private int carID;
     private static int uniqueID = 1;
+    private static Map<Integer, Cars> carRegistry = new HashMap<>();
+    private int carID;
     private String make;
     private String model;
     private int year;
     private String type;
     private CarStatus status;
+
 
     public Cars(String make, String model, int year, String type, CarStatus status){
         this.carID = uniqueID++;
@@ -16,6 +21,7 @@ public class Cars {
         this.year = year;
         this.type = type;
         this.status = status;
+        carRegistry.put(this.carID, this);
     }
 
     public int getCarID() {
@@ -60,6 +66,10 @@ public class Cars {
 
     public void setStatus(CarStatus status) {
         this.status = status;
+    }
+
+    public static Cars getCarByID(int id) {
+        return carRegistry.get(id);
     }
 
 }
