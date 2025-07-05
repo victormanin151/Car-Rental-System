@@ -62,5 +62,4 @@ public class Cars {
         this.status = status;
     }
 
-
 }
