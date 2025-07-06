@@ -32,14 +32,14 @@ public class Main {
                     choice = Integer.parseInt(input);
                     if(choice >= 0 && choice < 8){
                         validInput = true;
-                    }
-                } catch (NumberFormatException ignored) {
-                    }
-
-                    if (!validInput) {
+                    }else {
                         System.out.println("**************************");
-                        System.out.println("Invalid input — please enter a number between 0 and 7.");
+                        System.out.println("Out of range — please enter a number between 0 and 7.");
                     }
+                } catch (NumberFormatException e) {
+                    System.out.println("**************************");
+                    System.out.println("Invalid input. Please enter a number between 0 and 7.");
+                }
             }
 
             switch (choice) {
