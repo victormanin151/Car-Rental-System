@@ -1,6 +1,8 @@
 package customer;
 import cars.Cars;
 
+import static services.CarService.getCarByID;
+
 public class Customer {
     private String firstName;
     private String lastName;
@@ -16,7 +18,7 @@ public class Customer {
         this.userName = userName;
         this.startDate = startDate;
         this.returnDate = returnDate;
-        this.chosenCar = Cars.getCarByID(carID);
+        this.chosenCar = getCarByID(carID);
     }
 
     public String getFirstName() {

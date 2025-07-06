@@ -1,4 +1,7 @@
+import services.CarService;
+import utils.CarMenu;
 import java.util.Scanner;
+import static utils.MainMenu.getValidMenu;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,32 +24,13 @@ public class Main {
             System.out.println("7 - Remove a specific car.");
             System.out.println("0 - Save & Exit the program!");
 
-            int choice = -1;
-            boolean validInput = false;
-
-            while (!validInput) {
-                System.out.println("**************************");
-                System.out.print("Select from the menu (0–7): ");
-                String input = s.nextLine();
-                try {
-                    choice = Integer.parseInt(input);
-                    if(choice >= 0 && choice < 8){
-                        validInput = true;
-                    }else {
-                        System.out.println("**************************");
-                        System.out.println("Out of range — please enter a number between 0 and 7.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("**************************");
-                    System.out.println("Invalid input. Please enter a number between 0 and 7.");
-                }
-            }
+            int choice = getValidMenu(s);
 
             switch (choice) {
-//                case 1 ->
+                case 1 -> CarMenu.addCarMenu(s);
 //                case 2 ->
 //                case 3 ->
-//                case 4 ->
+                case 4 -> CarService.listAllCars();
 //                case 5 ->
 //                case 6 ->
 //                case 7 ->
