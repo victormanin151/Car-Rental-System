@@ -20,10 +20,12 @@ public class CarService {
 
     public static void listAllCars() {
         if (carRegistry.isEmpty()) {
+            System.out.println("***********************");
             System.out.println("No cars in the system.");
         } else {
             for (Cars car : carRegistry.values()) {
-                System.out.println("Car List:");
+                System.out.println("***********************");
+                System.out.println("----------------- Car List -----------------");
                 System.out.println("Car ID / MAKE / MODEL / YEAR / TYPE / STATUS");
                 System.out.println("[" + car.getCarID() + "] " + car.getMake() + " " + car.getModel() + " " + car.getYear()
                 + " " + car.getType() + " " + car.getStatus());
@@ -35,6 +37,18 @@ public class CarService {
         Cars car = carRegistry.get(carID);
         if (car == null) return false;
         car.setStatus(newStatus);
+        return true;
+    }
+
+    public static boolean editCar(int carID, String newMake, String newModel, int newYear, String newType) {
+        Cars car = carRegistry.get(carID);
+        if (car == null) return false;
+
+        car.setMake(newMake);
+        car.setModel(newModel);
+        car.setYear(newYear);
+        car.setType(newType);
+
         return true;
     }
 

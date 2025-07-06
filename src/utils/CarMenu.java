@@ -1,6 +1,7 @@
 package utils;
 
 import cars.CarStatus;
+import cars.Cars;
 import services.CarService;
 
 import java.util.Scanner;
@@ -28,13 +29,14 @@ public class CarMenu {
             }
         }
 
-        System.out.print("Enter type (e.g., Sedan, SUV, Truck): ");
+        System.out.print("Enter type (example: Sedan, SUV, Truck): ");
         String type = s.nextLine();
 
         CarService.addCar(make, model, year, type, CarStatus.AVAILABLE);
 
         System.out.println("**************************");
         System.out.println("Car successfully added!");
+        System.out.println("**************************");
     }
 
     public static void changeCarStatusMenu(Scanner s) {
@@ -66,6 +68,49 @@ public class CarMenu {
 
         if (success) {
             System.out.println("Car status updated successfully to " + selectedStatus);
+        } else {
+            System.out.println("Car with ID " + carID + " not found.");
+        }
+    }
+
+
+    public static void editCarMenu(Scanner s) {
+        System.out.print("Enter the Car ID to edit: ");
+        int carID = Integer.parseInt(s.nextLine());
+
+        System.out.println("************************");
+        Cars carToEdit = CarService.getCarByID(carID);
+        if (carToEdit == null) {
+            System.out.println("Car with ID " + carID + " not found.");
+            return;
+        }
+
+        System.out.println("Editing car: " + carToEdit.getMake() + " " + carToEdit.getModel());
+
+
+        System.out.print("Enter new make: ");
+        String newMake = s.nextLine();
+
+        System.out.print("Enter new model: ");
+        String newModel = s.nextLine();
+
+        int newYear;
+        while (true) {
+            try {
+                System.out.print("Enter new year: ");
+                newYear = Integer.parseInt(s.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid year. Please enter a valid number.");
+            }
+        }
+
+        System.out.print("Enter new type: ");
+        String newType = s.nextLine();
+
+        boolean success = CarService.editCar(carID, newMake, newModel, newYear, newType);
+        if (success) {
+            System.out.println("Car updated successfully!");
         } else {
             System.out.println("Car with ID " + carID + " not found.");
         }
