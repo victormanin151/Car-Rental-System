@@ -31,7 +31,7 @@ public class Main {
 //                case 2 ->
                 case 3 -> CarMenu.editCarMenu(s);
                 case 4 -> CarService.listAllCars();
-//                case 5 ->
+                case 5 -> CarMenu.searchCarMenu(s);
                 case 6 -> CarMenu.changeCarStatusMenu(s);
                 case 0 -> {
                     isRunning = false;

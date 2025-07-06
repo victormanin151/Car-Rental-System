@@ -3,7 +3,9 @@ package services;
 import cars.CarStatus;
 import cars.Cars;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CarService {
@@ -23,10 +25,10 @@ public class CarService {
             System.out.println("***********************");
             System.out.println("No cars in the system.");
         } else {
+            System.out.println("***********************");
+            System.out.println("----------------- Car List -----------------");
+            System.out.println("Car ID / MAKE / MODEL / YEAR / TYPE / STATUS");
             for (Cars car : carRegistry.values()) {
-                System.out.println("***********************");
-                System.out.println("----------------- Car List -----------------");
-                System.out.println("Car ID / MAKE / MODEL / YEAR / TYPE / STATUS");
                 System.out.println("[" + car.getCarID() + "] " + car.getMake() + " " + car.getModel() + " " + car.getYear()
                 + " " + car.getType() + " " + car.getStatus());
             }
@@ -50,6 +52,31 @@ public class CarService {
         car.setType(newType);
 
         return true;
+    }
+
+    public static List<Cars> searchCarsByKeyword(String keyword) {
+        List<Cars> results = new ArrayList<>();
+        String lowerKeyword = keyword.toLowerCase();
+
+        for (Cars car : carRegistry.values()) {
+            if (car.getMake().toLowerCase().contains(lowerKeyword)
+                    || car.getModel().toLowerCase().contains(lowerKeyword)
+                    || car.getType().toLowerCase().contains(lowerKeyword)) {
+                results.add(car);
+            }
+        }
+
+        return results;
+    }
+
+    public static List<Cars> searchCarsByStatus(CarStatus status) {
+        List<Cars> results = new ArrayList<>();
+        for (Cars car : carRegistry.values()) {
+            if (car.getStatus() == status) {
+                results.add(car);
+            }
+        }
+        return results;
     }
 
 }

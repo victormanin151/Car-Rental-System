@@ -4,6 +4,7 @@ import cars.CarStatus;
 import cars.Cars;
 import services.CarService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CarMenu {
@@ -114,5 +115,93 @@ public class CarMenu {
         } else {
             System.out.println("Car with ID " + carID + " not found.");
         }
+    }
+
+    public static void searchCarMenu(Scanner s) {
+        System.out.println("Search Car Menu");
+        System.out.println("1 - Search by Car ID");
+        System.out.println("2 - Search by Keyword (Make, Model, Type)");
+        System.out.println("3 - Search by Status");
+        System.out.print("Choose option (1-3): ");
+
+        String option = s.nextLine();
+
+        switch (option) {
+            case "1" -> {
+                System.out.print("Enter Car ID: ");
+                try {
+                    int id = Integer.parseInt(s.nextLine());
+                    Cars car = CarService.getCarByID(id);
+                    if (car != null) {
+                        printCarDetails(car);
+                    } else {
+                        System.out.println("No car found with ID " + id);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid ID input.");
+                }
+            }
+            case "2" -> {
+                System.out.print("Enter keyword: ");
+                String keyword = s.nextLine();
+                List<Cars> results = CarService.searchCarsByKeyword(keyword);
+                if (results.isEmpty()) {
+                    System.out.println("No cars found matching \"" + keyword + "\"");
+                } else {
+                    System.out.println("Search results:");
+                    for (Cars car : results) {
+                        printCarSummary(car);
+                    }
+                }
+            }
+            case "3" -> {
+                System.out.println("Select status to search by:");
+                for (CarStatus status : CarStatus.values()) {
+                    System.out.println(status.ordinal() + " - " + status);
+                }
+
+                int statusChoice = -1;
+                while (true) {
+                    try {
+                        System.out.print("Enter choice: ");
+                        statusChoice = Integer.parseInt(s.nextLine());
+                        if (statusChoice >= 0 && statusChoice < CarStatus.values().length) {
+                            break;
+                        } else {
+                            System.out.println("Invalid choice, try again.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input, try again.");
+                    }
+                }
+
+                CarStatus selectedStatus = CarStatus.values()[statusChoice];
+                List<Cars> results = CarService.searchCarsByStatus(selectedStatus);
+
+                if (results.isEmpty()) {
+                    System.out.println("No cars found with status " + selectedStatus);
+                } else {
+                    System.out.println("Cars with status " + selectedStatus + ":");
+                    for (Cars car : results) {
+                        printCarSummary(car);
+                    }
+                }
+            }
+            default -> System.out.println("Invalid option selected.");
+        }
+    }
+
+    private static void printCarDetails(Cars car) {
+        System.out.println("Car Details:");
+        System.out.println("ID: " + car.getCarID());
+        System.out.println("Make: " + car.getMake());
+        System.out.println("Model: " + car.getModel());
+        System.out.println("Year: " + car.getYear());
+        System.out.println("Type: " + car.getType());
+        System.out.println("Status: " + car.getStatus());
+    }
+
+    private static void printCarSummary(Cars car) {
+        System.out.println("[" + car.getCarID() + "] " + car.getMake() + " " + car.getModel() + " (" + car.getType() + ")");
     }
 }
