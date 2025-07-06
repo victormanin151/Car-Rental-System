@@ -33,9 +33,9 @@ public class CarService {
                 String rentedBy = "";
 
                 if (car.getStatus() == CarStatus.BOOKED && car.getRentedBy() != null) {
-                    rentedBy = car.getRentedBy().getFullName(); // or getUserName()
+                    rentedBy = car.getRentedBy().getFullName();
                 } else {
-                    rentedBy = "—";  // em dash or just "N/A"
+                    rentedBy = "—";
                 }
 
                 System.out.println("[" + car.getCarID() + "] " +

@@ -160,7 +160,7 @@ public class CarMenu {
                     System.out.println(status.ordinal() + " - " + status);
                 }
 
-                int statusChoice = -1;
+                int statusChoice;
                 while (true) {
                     try {
                         System.out.print("Enter choice: ");
