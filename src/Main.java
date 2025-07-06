@@ -32,8 +32,8 @@ public class Main {
 //                case 3 ->
                 case 4 -> CarService.listAllCars();
 //                case 5 ->
-//                case 6 ->
-//                case 7 ->
+                case 6 -> CarMenu.changeCarStatusMenu(s);
+//                case 7 -> ;
                 case 0 -> {
                     isRunning = false;
                     System.out.println("Saving and exiting the program...");

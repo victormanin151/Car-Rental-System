@@ -1,7 +1,6 @@
 package utils;
 
 import cars.CarStatus;
-import cars.Cars;
 import services.CarService;
 
 import java.util.Scanner;
@@ -36,5 +35,39 @@ public class CarMenu {
 
         System.out.println("**************************");
         System.out.println("Car successfully added!");
+    }
+
+    public static void changeCarStatusMenu(Scanner s) {
+        System.out.print("Enter the Car ID to change status: ");
+        int carID = Integer.parseInt(s.nextLine());
+
+        System.out.println("Select new status:");
+        for (CarStatus status : CarStatus.values()) {
+            System.out.println(status.ordinal() + " - " + status);
+        }
+
+        int statusChoice;
+        while (true) {
+            try {
+                System.out.print("Enter choice: ");
+                statusChoice = Integer.parseInt(s.nextLine());
+                if (statusChoice >= 0 && statusChoice < CarStatus.values().length) {
+                    break;
+                } else {
+                    System.out.println("Invalid choice, try again.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input, try again.");
+            }
+        }
+
+        CarStatus selectedStatus = CarStatus.values()[statusChoice];
+        boolean success = CarService.updateCarStatus(carID, selectedStatus);
+
+        if (success) {
+            System.out.println("Car status updated successfully to " + selectedStatus);
+        } else {
+            System.out.println("Car with ID " + carID + " not found.");
+        }
     }
 }

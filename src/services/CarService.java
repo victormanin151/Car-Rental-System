@@ -23,9 +23,19 @@ public class CarService {
             System.out.println("No cars in the system.");
         } else {
             for (Cars car : carRegistry.values()) {
-                System.out.println("[" + car.getCarID() + "] " + car.getMake() + " " + car.getModel());
+                System.out.println("Car List:");
+                System.out.println("Car ID / MAKE / MODEL / YEAR / TYPE / STATUS");
+                System.out.println("[" + car.getCarID() + "] " + car.getMake() + " " + car.getModel() + " " + car.getYear()
+                + " " + car.getType() + " " + car.getStatus());
             }
         }
+    }
+
+    public static boolean updateCarStatus(int carID, CarStatus newStatus) {
+        Cars car = carRegistry.get(carID);
+        if (car == null) return false;
+        car.setStatus(newStatus);
+        return true;
     }
 
 }
