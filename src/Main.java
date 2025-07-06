@@ -49,7 +49,7 @@ public class Main {
 //                case 4 ->
 //                case 5 ->
 //                case 6 ->
-                case 7 -> System.out.println("Remove a specific car (coming soon).");
+//                case 7 ->
                 case 0 -> {
                     isRunning = false;
                     System.out.println("Saving and exiting the program...");
