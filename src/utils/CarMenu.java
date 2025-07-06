@@ -33,7 +33,8 @@ public class CarMenu {
         System.out.print("Enter type (example: Sedan, SUV, Truck): ");
         String type = s.nextLine();
 
-        CarService.addCar(make, model, year, type, CarStatus.AVAILABLE);
+        Cars newCar =  CarService.addCar(make, model, year, type, CarStatus.AVAILABLE);
+        CarService.appendCarToFile(newCar);
 
         System.out.println("**************************");
         System.out.println("Car successfully added!");

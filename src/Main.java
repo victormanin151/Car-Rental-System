@@ -9,13 +9,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         boolean isRunning = true;
+        CarService.loadCarsFromFile();
 
         System.out.println("********************************");
         System.out.println("Welcome to the Car Rental System");
         System.out.println("********************************");
 
 
-        while(isRunning){
+        while(isRunning) {
             System.out.println("Select from the menu below");
             System.out.println("**************************");
             System.out.println("1 - Add a new car.");
@@ -40,6 +41,7 @@ public class Main {
                 case 0 -> {
                     isRunning = false;
                     System.out.println("Saving and exiting the program...");
+                    CarService.saveCarsToFile();
                     System.out.println("**************************");
                     System.out.println("Thank you for using Car Rental System!");
                     System.out.println("Have a nice day!");

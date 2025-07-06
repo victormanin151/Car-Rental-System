@@ -3,6 +3,8 @@ import cars.CarStatus;
 import cars.Cars;
 import customer.Customer;
 import services.CarService;
+import services.DateValidator;
+
 import java.util.Scanner;
 
 public class CustomerMenu {
@@ -29,15 +31,23 @@ public class CustomerMenu {
         System.out.println("Enter last name:");
         String lastName = s.nextLine();
 
-        System.out.println("Enter start date:");
-        String startDate = s.nextLine();
+        String startDate, returnDate;
 
-        System.out.println("Enter return date:");
-        String returnDate = s.nextLine();
+        while (true) {
+            System.out.println("Enter start date (dd/MM/yyyy): ");
+            startDate = s.nextLine();
+
+            System.out.println("Enter end date (dd/MM/yyyy): ");
+            returnDate = s.nextLine();
+
+            if (DateValidator.isValidRentalPeriod(startDate, returnDate)) {
+                break;
+            } else {
+                System.out.println("Invalid rental period. Please try again.");
+            }
+        }
 
         Customer customer = new Customer(firstName, lastName, startDate, returnDate, carID);
-
-        car.setRentedBy(customer);
 
         System.out.println("Car rented successfully to " + customer.getFullName());
 

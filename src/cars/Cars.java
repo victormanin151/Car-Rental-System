@@ -11,6 +11,7 @@ public class Cars {
     private String type;
     private CarStatus status;
     private Customer rentedBy;
+    private String rentedByUsername;
 
 
     public Cars(String make, String model, int year, String type, CarStatus status){
@@ -78,4 +79,14 @@ public class Cars {
         return rentedBy != null;
     }
 
+    public void setCarID(int id) {
+    }
+
+    public String getRentedByUsername() {
+        return rentedByUsername;
+    }
+
+    public void setRentedByUsername(String username) {
+        this.rentedByUsername = username;
+    }
 }
