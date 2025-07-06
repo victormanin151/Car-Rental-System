@@ -204,4 +204,26 @@ public class CarMenu {
     private static void printCarSummary(Cars car) {
         System.out.println("[" + car.getCarID() + "] " + car.getMake() + " " + car.getModel() + " (" + car.getType() + ")");
     }
+
+    public static void returnCarMenu(Scanner s) {
+        System.out.print("Enter Car ID to return: ");
+        int carID = Integer.parseInt(s.nextLine());
+
+        Cars car = CarService.getCarByID(carID);
+
+        if (car == null) {
+            System.out.println("Car not found.");
+            return;
+        }
+
+        if (!car.isRented()) {
+            System.out.println("This car is not currently rented.");
+            return;
+        }
+
+        car.setRentedBy(null);
+        car.setStatus(CarStatus.AVAILABLE);
+
+        System.out.println("Car successfully returned and marked as AVAILABLE.");
+    }
 }

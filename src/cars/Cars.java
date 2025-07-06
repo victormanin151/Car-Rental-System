@@ -1,5 +1,7 @@
 package cars;
 
+import customer.Customer;
+
 public class Cars {
     private static int uniqueID = 1;
     private int carID;
@@ -8,6 +10,7 @@ public class Cars {
     private int year;
     private String type;
     private CarStatus status;
+    private Customer rentedBy;
 
 
     public Cars(String make, String model, int year, String type, CarStatus status){
@@ -61,6 +64,18 @@ public class Cars {
 
     public void setStatus(CarStatus status) {
         this.status = status;
+    }
+
+    public Customer getRentedBy() {
+        return rentedBy;
+    }
+
+    public void setRentedBy(Customer rentedBy) {
+        this.rentedBy = rentedBy;
+    }
+
+    public boolean isRented() {
+        return rentedBy != null;
     }
 
 }

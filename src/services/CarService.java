@@ -26,11 +26,25 @@ public class CarService {
             System.out.println("No cars in the system.");
         } else {
             System.out.println("***********************");
-            System.out.println("----------------- Car List -----------------");
-            System.out.println("Car ID / MAKE / MODEL / YEAR / TYPE / STATUS");
+            System.out.println("------------- Car List -------------");
+            System.out.println("ID | MAKE | MODEL | YEAR | TYPE | STATUS | RENTED BY");
+
             for (Cars car : carRegistry.values()) {
-                System.out.println("[" + car.getCarID() + "] " + car.getMake() + " " + car.getModel() + " " + car.getYear()
-                + " " + car.getType() + " " + car.getStatus());
+                String rentedBy = "";
+
+                if (car.getStatus() == CarStatus.BOOKED && car.getRentedBy() != null) {
+                    rentedBy = car.getRentedBy().getFullName(); // or getUserName()
+                } else {
+                    rentedBy = "—";  // em dash or just "N/A"
+                }
+
+                System.out.println("[" + car.getCarID() + "] " +
+                        car.getMake() + " " +
+                        car.getModel() + " " +
+                        car.getYear() + " " +
+                        car.getType() + " " +
+                        car.getStatus() + " | " +
+                        rentedBy);
             }
         }
     }

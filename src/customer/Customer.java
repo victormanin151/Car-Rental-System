@@ -11,11 +11,10 @@ public class Customer {
     private String returnDate;
     private Cars chosenCar;
 
-    public Customer(String firstName, String lastName, String userName,
+    public Customer(String firstName, String lastName,
                     String startDate, String returnDate, int carID){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userName = userName;
         this.startDate = startDate;
         this.returnDate = returnDate;
         this.chosenCar = getCarByID(carID);
@@ -37,12 +36,8 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 
     public String getStartDate() {
